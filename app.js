@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import _ from 'lodash';
 import path from 'path';
+import chalk from 'chalk';
 
 const app = express();
 const PORT = 3000;
@@ -73,6 +74,17 @@ ${generarListaUsuarios(hombres)}
 <h2>Mujeres</h2>
 ${generarListaUsuarios(mujeres)}
 `;
+
+// Imprimir la lista de usuarios en la consola con chalk
+console.log(chalk.white.bgBlue('Lista de usuarios registrados:'));
+console.log(chalk.white('Hombres:'));
+    hombres.forEach(usuario => {
+        console.log(chalk.blue.bgWhite(`Nombre: ${usuario.firstName} ${usuario.lastName}, ID: ${usuario.id}, Timestamp: ${usuario.timestamp}`));
+    });
+    console.log(chalk.white('Mujeres:'));
+    mujeres.forEach(usuario => {
+        console.log(chalk.blue.bgWhite(`Nombre: ${usuario.firstName} ${usuario.lastName}, ID: ${usuario.id}, Timestamp: ${usuario.timestamp}`));
+    });
 
 // Enviar la respuesta HTML al cliente
 res.send(respuestaHTML+'Registrar nuevo usuario: <a href="/registrar">Registrar</a>');
